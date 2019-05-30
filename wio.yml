@@ -1,0 +1,19 @@
+type: app
+
+project:
+  name: cosa-i2c-scanner
+  description: Scanner for scanning connected I2C devices
+  version: 1.0.0
+  keywords:
+  - wio
+  - app
+  compile_options:
+    wio_version: 0.6.0
+    default_target: main
+
+targets:
+  main:
+    src: src
+    platform: avr
+    framework: cosa
+    board: mega2560
