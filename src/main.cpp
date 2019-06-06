@@ -23,27 +23,16 @@ void loop() {
     twi.acquire(&driver);
 
     auto status = twi.write(TEST_DATA, sizeof(TEST_DATA));
-    if (status == TEST_DATA) {
+    if (status == sizeof(TEST_DATA)) {
       // found the device
-      trace << PSTR("I2C device found at address 0x");
-      if (address < 16) {
-        trace << "0";
-      }
-      trace << toHEX(address) << endl;
+      trace << PSTR("I2C device found at address ") << hex << address << endl;
       ++num_devices;
-    } else if (status < 0) {
-      // error occurred
-      trace << PSTR("Unknown error at address 0x");
-      if (address < 16) {
-        trace << "0";
-      }
-      trace << toHEX(address) << endl;
     }
 
     twi.release();
   }
 
-  if (num_devices > 0) {
+  if (num_devices <= 0) {
     trace << PSTR("No I2C devices found") << endl;
   } else {
     trace << PSTR("Done!") << endl;
@@ -51,3 +40,4 @@ void loop() {
 
   delay(SCAN_DELAY);
 }
+
